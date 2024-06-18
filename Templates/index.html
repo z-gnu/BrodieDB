@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Parts Inspection</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <h1>Parts Inspection</h1>
+    <h2>Add New Part</h2>
+    <form action="/add" method="post">
+        <label for="supplier">Supplier:</label>
+        <input type="text" id="supplier" name="supplier" required>
+        <label for="part_number">Part Number:</label>
+        <input type="text" id="part_number" name="part_number" required>
+        <label for="date">Date:</label>
+        <input type="date" id="date" name="date" required>
+        <label for="inspector">Inspector:</label>
+        <input type="text" id="inspector" name="inspector" required>
+        <button type="submit">Add Part</button>
+    </form>
+    <h2>Search</h2>
+    <form action="/search" method="get">
+        <input type="text" id="query" name="query" placeholder='Search' required>
+        <button type="submit">Search</button>
+    </form>
+    <h2>Parts List</h2>
+    <ul>
+        {% for part in parts %}
+            <li>
+                ID: {{ part[0] }}, Supplier: {{ part[1] }}, Part Number: {{ part[2] }}, Date: {{ part[3] }}, Inspector: {{ part[4] }}
+                <a href="{{ url_for('delete_part', part_id=part[0]) }}">Delete</a>
+            </li>
+        {% endfor %}
+    </ul>
+
+</body>
+</html>
